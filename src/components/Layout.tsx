@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Phone, Menu, X, CheckCircle, Clock, MapPin, Award } from 'lucide-react';
+import { Phone, Menu, X, CheckCircle, Clock, MapPin, Award, Facebook, Instagram, Linkedin, Mail } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { t } from '../translations';
 
@@ -185,7 +185,28 @@ export default function Layout() {
                 <MapPin className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                 <span className="text-sm">{texts.footerMobile}</span>
               </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <span className="text-sm">{texts.footerAddress}</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <span className="text-sm">24plomberie@gmail.com</span>
+              </li>
             </ul>
+
+            <h3 className="font-heading font-bold text-white text-lg mt-6 mb-4">{texts.footerSocial}</h3>
+            <div className="flex gap-4">
+              <a href="#" className="hover:text-accent transition-colors">
+                <Facebook className="w-6 h-6" />
+              </a>
+              <a href="#" className="hover:text-accent transition-colors">
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a href="#" className="hover:text-accent transition-colors">
+                <Linkedin className="w-6 h-6" />
+              </a>
+            </div>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-center text-sm">

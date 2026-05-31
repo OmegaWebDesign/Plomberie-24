@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, CheckCircle, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, CheckCircle, Clock, Facebook, Instagram, Linkedin } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { t } from '../translations';
 
@@ -78,10 +78,34 @@ export default function Contact() {
                   </div>
                   <div>
                     <strong className="block text-primary uppercase text-xs tracking-wider mb-1">{texts.infoEmail}</strong>
-                    <span className="text-slate-600 font-light font-medium">info@plomberie24.ca</span>
+                    <span className="text-slate-600 font-light font-medium">24plomberie@gmail.com</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="bg-light p-3 rounded-lg text-secondary border border-slate-100">
+                    <MapPin className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <strong className="block text-primary uppercase text-xs tracking-wider mb-1">{texts.infoAddress}</strong>
+                    <span className="text-slate-600 font-light font-medium">{texts.infoAddressDesc}</span>
                   </div>
                 </li>
               </ul>
+
+              <div className="mt-8 pt-8 border-t border-slate-100">
+                <h3 className="font-bold text-lg text-primary mb-4">{texts.infoSocial}</h3>
+                <div className="flex gap-4">
+                  <a href="#" className="bg-light p-3 rounded-lg text-secondary hover:bg-secondary hover:text-white transition-colors border border-slate-100">
+                    <Facebook className="w-6 h-6" />
+                  </a>
+                  <a href="#" className="bg-light p-3 rounded-lg text-secondary hover:bg-secondary hover:text-white transition-colors border border-slate-100">
+                    <Instagram className="w-6 h-6" />
+                  </a>
+                  <a href="#" className="bg-light p-3 rounded-lg text-secondary hover:bg-secondary hover:text-white transition-colors border border-slate-100">
+                    <Linkedin className="w-6 h-6" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
