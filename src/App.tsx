@@ -10,19 +10,22 @@ import Services from './pages/Services';
 import Zones from './pages/Zones';
 import Avis from './pages/Avis';
 import Contact from './pages/Contact';
+import { LanguageProvider } from './context/LanguageContext';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="services" element={<Services />} />
-          <Route path="zones" element={<Zones />} />
-          <Route path="avis" element={<Avis />} />
-          <Route path="contact" element={<Contact />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="services" element={<Services />} />
+            <Route path="zones" element={<Zones />} />
+            <Route path="avis" element={<Avis />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </LanguageProvider>
   );
 }

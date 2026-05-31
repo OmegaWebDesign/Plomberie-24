@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, CheckCircle, Clock } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { t } from '../translations';
 
 const phoneNumber = "(438) 998-8869";
 const phoneLink = "tel:4389988869";
 
 export default function Contact() {
+  const { lang } = useLanguage();
+  const texts = t(lang).contact;
+
   useEffect(() => {
-    document.title = "Contacter Plomberie24 | Urgence Plombier 24h/7j";
+    document.title = texts.metaTitle;
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', "Contactez Plomberie24 pour une urgence ou un devis. Appelez le (438) 998-8869 pour une intervention immédiate dans le Grand Montréal.");
-  }, []);
+    if (meta) meta.setAttribute('content', texts.metaDesc);
+  }, [texts]);
 
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
 
@@ -26,8 +31,8 @@ export default function Contact() {
     <div className="w-full bg-light">
       <div className="bg-primary text-white py-16 border-b-4 border-accent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading font-black text-4xl sm:text-5xl mb-4 tracking-tight">Contactez-nous</h1>
-          <p className="text-xl text-slate-300 max-w-2xl font-light">Une urgence ? Le plus rapide est de nous appeler directement. Pour toute autre demande, utilisez le formulaire.</p>
+          <h1 className="font-heading font-black text-4xl sm:text-5xl mb-4 tracking-tight">{texts.title}</h1>
+          <p className="text-xl text-slate-300 max-w-2xl font-light">{texts.desc}</p>
         </div>
       </div>
 
@@ -37,16 +42,16 @@ export default function Contact() {
           {/* Direct Contact Info */}
           <div>
             <div className="bg-white rounded-lg p-8 shadow-sm border border-slate-200 mb-8 hover:border-secondary transition-colors">
-              <h2 className="font-heading font-black text-2xl text-primary mb-6">Service d'urgence 24h</h2>
+              <h2 className="font-heading font-black text-2xl text-primary mb-6">{texts.servTitle}</h2>
               <a href={phoneLink} className="flex items-center justify-center gap-4 bg-accent hover:bg-red-700 text-white px-8 py-5 rounded-sm font-bold text-2xl transition-transform shadow-xl hover:shadow-2xl hover:scale-105 mb-6">
                 <Phone className="w-8 h-8 animate-pulse" />
                 {phoneNumber}
               </a>
-              <p className="text-center text-slate-600 font-light">On répond à toute heure. Estimation verbale gratuite.</p>
+              <p className="text-center text-slate-600 font-light">{texts.servDesc}</p>
             </div>
 
             <div className="bg-white rounded-lg p-8 shadow-sm border border-slate-200">
-              <h3 className="font-black text-xl text-primary mb-6 border-b-2 border-slate-100 pb-4">Informations</h3>
+              <h3 className="font-black text-xl text-primary mb-6 border-b-2 border-slate-100 pb-4">{texts.infoTitle}</h3>
               
               <ul className="space-y-6">
                 <li className="flex items-start gap-4">
@@ -54,8 +59,8 @@ export default function Contact() {
                     <Clock className="w-6 h-6" />
                   </div>
                   <div>
-                    <strong className="block text-primary uppercase text-xs tracking-wider mb-1">Heures d'ouverture</strong>
-                    <span className="text-slate-600 font-light font-medium">24 heures sur 24, 7 jours sur 7</span>
+                    <strong className="block text-primary uppercase text-xs tracking-wider mb-1">{texts.infoHours}</strong>
+                    <span className="text-slate-600 font-light font-medium">{texts.infoHoursDesc}</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
@@ -63,8 +68,8 @@ export default function Contact() {
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <strong className="block text-primary uppercase text-xs tracking-wider mb-1">Secteurs desservis</strong>
-                    <span className="text-slate-600 font-light font-medium">Grand Montréal, Laval, Rive-Nord, Rive-Sud</span>
+                    <strong className="block text-primary uppercase text-xs tracking-wider mb-1">{texts.infoAreas}</strong>
+                    <span className="text-slate-600 font-light font-medium">{texts.infoAreasDesc}</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
@@ -72,7 +77,7 @@ export default function Contact() {
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <strong className="block text-primary uppercase text-xs tracking-wider mb-1">Courriel</strong>
+                    <strong className="block text-primary uppercase text-xs tracking-wider mb-1">{texts.infoEmail}</strong>
                     <span className="text-slate-600 font-light font-medium">info@plomberie24.ca</span>
                   </div>
                 </li>
@@ -82,54 +87,52 @@ export default function Contact() {
 
           {/* Form */}
           <div className="bg-white rounded-lg p-8 lg:p-10 shadow-sm border border-slate-200 border-t-4 border-t-primary">
-            <h2 className="font-heading font-black text-3xl text-primary mb-2">Demande en ligne</h2>
-            <p className="text-slate-500 mb-8 font-light">Remplissez ce formulaire et nous vous contacterons rapidement.</p>
+            <h2 className="font-heading font-black text-3xl text-primary mb-2">{texts.formTitle}</h2>
+            <p className="text-slate-500 mb-8 font-light">{texts.formDesc}</p>
             
             {formState === 'success' ? (
               <div className="bg-green-50 border border-green-200 text-green-800 rounded-lg p-8 text-center">
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                <h3 className="font-heading font-black text-2xl mb-2">Message envoyé !</h3>
-                <p className="font-light">Nous avons bien reçu votre demande. Un membre de notre équipe vous contactera sous peu.</p>
+                <h3 className="font-heading font-black text-2xl mb-2">{texts.formSuccessTitle}</h3>
+                <p className="font-light">{texts.formSuccessDesc}</p>
                 <button 
                   onClick={() => setFormState('idle')}
                   className="mt-6 font-bold text-green-700 hover:underline uppercase text-xs tracking-wider"
                 >
-                  Envoyer un autre message
+                  {texts.formSuccessBtn}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1">
-                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">Prénom et nom</label>
+                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">{texts.formName}</label>
                     <input type="text" required className="w-full bg-light border border-slate-200 focus:border-secondary focus:ring-1 focus:ring-secondary rounded-sm px-4 py-3 outline-none transition-colors" placeholder="Jean Tremblay" />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">Téléphone</label>
+                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">{texts.formPhone}</label>
                     <input type="tel" required className="w-full bg-light border border-slate-200 focus:border-secondary focus:ring-1 focus:ring-secondary rounded-sm px-4 py-3 outline-none transition-colors" placeholder="(514) 123-4567" />
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1">
-                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">Secteur / Ville</label>
+                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">{texts.formArea}</label>
                     <input type="text" required className="w-full bg-light border border-slate-200 focus:border-secondary focus:ring-1 focus:ring-secondary rounded-sm px-4 py-3 outline-none transition-colors" placeholder="Brossard" />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">Type de problème</label>
+                    <label className="font-bold text-xs uppercase tracking-wider text-slate-700">{texts.formType}</label>
                     <select className="w-full bg-light border border-slate-200 focus:border-secondary focus:ring-1 focus:ring-secondary rounded-sm px-4 py-3 outline-none transition-colors">
-                      <option>Urgence d'eau</option>
-                      <option>Débouchage</option>
-                      <option>Chauffe-eau</option>
-                      <option>Réparation de fuite</option>
-                      <option>Autre / Estimation</option>
+                      {[texts.formTypeOpt1, texts.formTypeOpt2, texts.formTypeOpt3, texts.formTypeOpt4, texts.formTypeOpt5].map((opt, i) => (
+                         <option key={i}>{opt}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-xs uppercase tracking-wider text-slate-700">Description du problème</label>
-                  <textarea required rows={4} className="w-full bg-light border border-slate-200 focus:border-secondary focus:ring-1 focus:ring-secondary rounded-sm px-4 py-3 outline-none transition-colors resize-none" placeholder="Expliquez brièvement votre situation..."></textarea>
+                  <label className="font-bold text-xs uppercase tracking-wider text-slate-700">{texts.formDescProblem}</label>
+                  <textarea required rows={4} className="w-full bg-light border border-slate-200 focus:border-secondary focus:ring-1 focus:ring-secondary rounded-sm px-4 py-3 outline-none transition-colors resize-none" placeholder={texts.formDescHolder}></textarea>
                 </div>
                 
                 <button 
@@ -140,7 +143,7 @@ export default function Contact() {
                   {formState === 'submitting' ? (
                     <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   ) : (
-                    "Envoyer la demande"
+                    texts.formSubmit
                   )}
                 </button>
               </form>

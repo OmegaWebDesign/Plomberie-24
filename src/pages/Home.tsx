@@ -1,16 +1,21 @@
 import { Phone, CheckCircle, Shield, Droplets, PenTool as Tool, Video, Search, ArrowRight, Star, Clock, CircleAlert, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { t } from '../translations';
 
 const phoneNumber = "(438) 998-8869";
 const phoneLink = "tel:4389988869";
 
 export default function Home() {
+  const { lang } = useLanguage();
+  const texts = t(lang).home;
+
   useEffect(() => {
-    document.title = "Plombier Urgence Montréal 24h/7 | Plomberie24";
+    document.title = texts.metaTitle;
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', "Besoin d'un plombier d'urgence à Montréal? Appelez Plomberie24. Service 24h/7j, intervention rapide pour débouchage et dégâts d'eau.");
-  }, []);
+    if (meta) meta.setAttribute('content', texts.metaDesc);
+  }, [texts]);
 
   return (
     <div className="w-full">
@@ -24,31 +29,31 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10 flex flex-col items-start text-left">
           <span className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-bold tracking-widest uppercase mb-6">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-ping" />
-            Vrais plombiers. Vraie urgence.
+            {texts.heroBadge}
           </span>
           <h1 className="font-heading font-black text-5xl sm:text-6xl lg:text-7xl mb-6 leading-none max-w-4xl tracking-tight">
-            Plombier urgence Montréal<br />
-            <span className="text-accent">Disponible 24h/7j</span>
+            {texts.heroTitle1}<br />
+            <span className="text-accent">{texts.heroTitle2}</span>
           </h1>
           <p className="text-xl sm:text-2xl text-slate-300 mb-10 max-w-2xl font-light">
-            On décroche à toute heure. Intervention rapide, bon prix. Ne laissez pas un dégât d'eau ruiner votre journée.
+            {texts.heroDesc}
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
             <a href={phoneLink} className="w-full sm:w-auto flex items-center justify-center gap-3 bg-accent hover:bg-red-700 text-white px-10 py-5 rounded-sm font-bold text-xl shadow-2xl transition-transform hover:scale-105">
               <Phone className="w-6 h-6 animate-pulse" />
-              Appeler maintenant
+              {texts.heroCall}
             </a>
             <Link to="/contact" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent border-2 border-white/30 hover:bg-white/10 text-white px-10 py-5 rounded-sm font-bold text-lg transition-colors">
-              Demander un rappel
+              {texts.heroCallback}
             </Link>
           </div>
           
           {/* Trust strip */}
           <div className="mt-16 flex flex-wrap justify-start gap-x-8 gap-y-4 text-sm sm:text-base font-medium opacity-70">
-            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> Membre CMMTQ</span>
-            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> Disponible maintenant</span>
-            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> Prix abordable</span>
-            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> Grand Montréal</span>
+            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> {texts.trustMember}</span>
+            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> {texts.trustAvailable}</span>
+            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> {texts.trustPrice}</span>
+            <span className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent" /> {texts.trustArea}</span>
           </div>
         </div>
       </section>
@@ -58,9 +63,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12">
             <div className="mb-6 md:mb-0">
-              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-accent mb-2">Nos Expertises</h2>
-              <h3 className="font-heading font-bold text-3xl sm:text-4xl text-primary tracking-tight">Nos services principaux</h3>
-              <p className="text-slate-600 max-w-2xl text-lg mt-4 font-light">Équipés pour résoudre n'importe quel problème de plomberie du premier coup.</p>
+              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-accent mb-2">{texts.servExpertise}</h2>
+              <h3 className="font-heading font-bold text-3xl sm:text-4xl text-primary tracking-tight">{texts.servTitle}</h3>
+              <p className="text-slate-600 max-w-2xl text-lg mt-4 font-light">{texts.servDesc}</p>
             </div>
           </div>
           
@@ -70,9 +75,9 @@ export default function Home() {
               <div className="w-14 h-14 bg-white shadow-sm text-secondary rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <CircleAlert className="w-7 h-7" />
               </div>
-              <h3 className="font-heading font-black text-xl mb-3 text-primary">Débouchage de drains</h3>
-              <p className="text-slate-600 mb-6 text-sm">Éviers, toilettes ou drains principaux bloqués? On intervient rapidement.</p>
-              <a href={phoneLink} className="inline-flex items-center font-bold text-xs text-secondary uppercase tracking-wider">Voir détails <ArrowRight className="w-4 h-4 ml-1" /></a>
+              <h3 className="font-heading font-black text-xl mb-3 text-primary">{texts.serv1Title}</h3>
+              <p className="text-slate-600 mb-6 text-sm">{texts.serv1Desc}</p>
+              <a href={phoneLink} className="inline-flex items-center font-bold text-xs text-secondary uppercase tracking-wider">{texts.servDetails} <ArrowRight className="w-4 h-4 ml-1" /></a>
             </div>
             
             {/* Service 2 */}
@@ -80,9 +85,9 @@ export default function Home() {
               <div className="w-14 h-14 bg-white shadow-sm text-secondary rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Droplets className="w-7 h-7" />
               </div>
-              <h3 className="font-heading font-black text-xl mb-3 text-primary">Plomberie générale</h3>
-              <p className="text-slate-600 mb-6 text-sm">Réparation de chauffe-eau, tuyaux qui fuient et installations.</p>
-              <a href={phoneLink} className="inline-flex items-center font-bold text-xs text-secondary uppercase tracking-wider">Voir détails <ArrowRight className="w-4 h-4 ml-1" /></a>
+              <h3 className="font-heading font-black text-xl mb-3 text-primary">{texts.serv2Title}</h3>
+              <p className="text-slate-600 mb-6 text-sm">{texts.serv2Desc}</p>
+              <a href={phoneLink} className="inline-flex items-center font-bold text-xs text-secondary uppercase tracking-wider">{texts.servDetails} <ArrowRight className="w-4 h-4 ml-1" /></a>
             </div>
             
             {/* Service 3 */}
@@ -90,9 +95,9 @@ export default function Home() {
               <div className="w-14 h-14 bg-white shadow-sm text-secondary rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Video className="w-7 h-7" />
               </div>
-              <h3 className="font-heading font-black text-xl mb-3 text-primary">Inspection par caméra</h3>
-              <p className="text-slate-600 mb-6 text-sm">Diagnostic précis des problèmes souterrains pour éviter des frais inutiles.</p>
-              <a href={phoneLink} className="inline-flex items-center font-bold text-xs text-secondary uppercase tracking-wider">Voir détails <ArrowRight className="w-4 h-4 ml-1" /></a>
+              <h3 className="font-heading font-black text-xl mb-3 text-primary">{texts.serv3Title}</h3>
+              <p className="text-slate-600 mb-6 text-sm">{texts.serv3Desc}</p>
+              <a href={phoneLink} className="inline-flex items-center font-bold text-xs text-secondary uppercase tracking-wider">{texts.servDetails} <ArrowRight className="w-4 h-4 ml-1" /></a>
             </div>
             
             {/* Service 4 */}
@@ -107,7 +112,7 @@ export default function Home() {
           </div>
           
           <div className="text-center mt-12">
-            <Link to="/services" className="inline-flex text-primary font-bold hover:text-secondary hover:underline underline-offset-4">Voir tous nos services →</Link>
+            <Link to="/services" className="inline-flex text-primary font-bold hover:text-secondary hover:underline underline-offset-4">{texts.servAll}</Link>
           </div>
         </div>
       </section>
@@ -117,8 +122,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary mb-6 tracking-tight">Pourquoi choisir Plomberie24 ?</h2>
-              <p className="text-gray-600 text-lg mb-8">On sait qu'avoir besoin d'un plombier est souvent stressant. Notre but est de régler le problème rapidement sans vider votre portefeuille.</p>
+              <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary mb-6 tracking-tight">{texts.whyTitle}</h2>
+              <p className="text-gray-600 text-lg mb-8">{texts.whyDesc}</p>
               
               <div className="space-y-6">
                 <div className="flex gap-4">
@@ -126,8 +131,8 @@ export default function Home() {
                     <Clock className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-primary">Intervention ultra-rapide</h4>
-                    <p className="text-gray-600">On priorise les urgences pour être chez vous dans les plus brefs délais, de jour comme de nuit.</p>
+                    <h4 className="font-bold text-lg text-primary">{texts.why1Title}</h4>
+                    <p className="text-gray-600">{texts.why1Desc}</p>
                   </div>
                 </div>
                 
@@ -136,8 +141,8 @@ export default function Home() {
                     <Shield className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-primary">Abordable et transparent</h4>
-                    <p className="text-gray-600">Nos tarifs sont clairs sur place avant le début des travaux. Pas de mauvaises surprises.</p>
+                    <h4 className="font-bold text-lg text-primary">{texts.why2Title}</h4>
+                    <p className="text-gray-600">{texts.why2Desc}</p>
                   </div>
                 </div>
                 
@@ -146,8 +151,8 @@ export default function Home() {
                     <CheckCircle className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-primary">Service professionnel certifié</h4>
-                    <p className="text-gray-600">Notre équipe possède les licences CMMTQ et RBQ requises. Travail garanti et sécuritaire.</p>
+                    <h4 className="font-bold text-lg text-primary">{texts.why3Title}</h4>
+                    <p className="text-gray-600">{texts.why3Desc}</p>
                   </div>
                 </div>
               </div>
@@ -162,7 +167,7 @@ export default function Home() {
                  <div className="bg-white rounded-2xl shadow-xl p-8 transform rotate-2 hover:rotate-0 transition-transform">
                     <div className="flex justify-between items-start mb-6">
                       <div className="w-12 h-12 bg-accent rounded-xl" />
-                      <div className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">En route</div>
+                      <div className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">{texts.whyStatusEnRoute}</div>
                     </div>
                     <div className="space-y-4">
                       <div className="h-4 bg-gray-100 rounded w-3/4" />
@@ -170,7 +175,7 @@ export default function Home() {
                       <div className="h-4 bg-gray-100 rounded w-5/6" />
                     </div>
                     <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
-                      <div className="font-bold text-primary">Urgence complétée</div>
+                      <div className="font-bold text-primary">{texts.whyStatusDone}</div>
                       <div className="flex text-yellow-400">
                         <Star className="w-5 h-5 fill-current" />
                         <Star className="w-5 h-5 fill-current" />
@@ -190,18 +195,18 @@ export default function Home() {
       <section className="py-20 bg-primary text-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <MapPin className="w-12 h-12 text-accent mx-auto mb-6" />
-          <h2 className="font-heading font-black text-3xl sm:text-4xl mb-6 tracking-tight">Zones desservies</h2>
+          <h2 className="font-heading font-black text-3xl sm:text-4xl mb-6 tracking-tight">{texts.zoneTitle}</h2>
           <p className="text-xl text-gray-300 mb-8 font-medium">
-            Nos plombiers locaux sont répartis stratégiquement pour couvrir l'ensemble de la région métropolitaine.
+            {texts.zoneDesc}
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold">Montréal</span>
-            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold text-accent shadow-[inset_0_0_0_2px_rgba(230,57,70,1)]">Laval</span>
-            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold">Rive-Sud</span>
-            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold">Rive-Nord</span>
+            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold">{texts.zone1}</span>
+            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold text-accent shadow-[inset_0_0_0_2px_rgba(230,57,70,1)]">{texts.zone2}</span>
+            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold">{texts.zone3}</span>
+            <span className="bg-white/10 px-6 py-3 rounded-xl font-bold">{texts.zone4}</span>
           </div>
           <Link to="/zones" className="font-bold underline underline-offset-4 hover:text-accent transition-colors">
-            Voir toutes les villes que nous couvrons
+            {texts.zoneLink}
           </Link>
         </div>
       </section>
@@ -211,7 +216,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-              <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary mb-4 tracking-tight">Avis clients</h2>
+              <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary mb-4 tracking-tight">{texts.revTitle}</h2>
               <div className="flex items-center gap-4">
                 <div className="flex bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
                    <div className="text-3xl font-black text-primary mr-3">4.8</div>
@@ -223,12 +228,12 @@ export default function Home() {
                         <Star className="w-4 h-4 fill-current" />
                         <Star className="w-4 h-4 fill-current text-yellow-300" />
                       </div>
-                      <span className="text-xs text-gray-500 font-medium">Sur 120+ avis Google</span>
+                      <span className="text-xs text-gray-500 font-medium">{texts.revCount}</span>
                    </div>
                 </div>
               </div>
             </div>
-            <Link to="/avis" className="text-secondary font-bold hover:underline underline-offset-4">Lire plus d'avis →</Link>
+            <Link to="/avis" className="text-secondary font-bold hover:underline underline-offset-4">{texts.revLink}</Link>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -241,10 +246,10 @@ export default function Home() {
                   <Star className="w-5 h-5 fill-current" />
                   <Star className="w-5 h-5 fill-current" />
                </div>
-               <p className="text-gray-700 italic mb-6">"Toilette débordée à 2h du matin. Ils ont répondu tout de suite et étaient chez moi en 45 minutes à Boucherville. Plombier très poli et efficace. Prix très correct pour une urgence de nuit."</p>
+               <p className="text-gray-700 italic mb-6">{texts.reviews[0].text}</p>
                <div>
-                 <div className="font-bold text-primary">Céline M.</div>
-                 <div className="text-sm text-gray-500">Boucherville</div>
+                 <div className="font-bold text-primary">{texts.reviews[0].name}</div>
+                 <div className="text-sm text-gray-500">{texts.reviews[0].city}</div>
                </div>
             </div>
             {/* Review 2 */}
@@ -256,10 +261,10 @@ export default function Home() {
                   <Star className="w-5 h-5 fill-current" />
                   <Star className="w-5 h-5 fill-current" />
                </div>
-               <p className="text-gray-700 italic mb-6">"Mon chauffe-eau a lâché un dimanche. J'ai appelé 3 endroits avant eux qui ne répondaient pas. Plomberie24 m'a envoyé quelqu'un et ils ont remplacé la cuve. Très bon service."</p>
+               <p className="text-gray-700 italic mb-6">{texts.reviews[1].text}</p>
                <div>
-                 <div className="font-bold text-primary">Jean-François L.</div>
-                 <div className="text-sm text-gray-500">Laval</div>
+                 <div className="font-bold text-primary">{texts.reviews[1].name}</div>
+                 <div className="text-sm text-gray-500">{texts.reviews[1].city}</div>
                </div>
             </div>
             {/* Review 3 */}
@@ -271,10 +276,10 @@ export default function Home() {
                   <Star className="w-5 h-5 fill-current" />
                   <Star className="w-5 h-5 fill-current text-yellow-200" />
                </div>
-               <p className="text-gray-700 italic mb-6">"L'évier de la cuisine était complètement bloqué. Le technicien a passé sa machine spéciale et tout est revenu à la normale."</p>
+               <p className="text-gray-700 italic mb-6">{texts.reviews[2].text}</p>
                <div>
-                 <div className="font-bold text-primary">Valérie P.</div>
-                 <div className="text-sm text-gray-500">Plateau Mont-Royal</div>
+                 <div className="font-bold text-primary">{texts.reviews[2].name}</div>
+                 <div className="text-sm text-gray-500">{texts.reviews[2].city}</div>
                </div>
             </div>
           </div>
@@ -284,8 +289,8 @@ export default function Home() {
       {/* Final CTA */}
       <section className="py-24 bg-light text-center border-t border-slate-200">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading font-black text-4xl sm:text-5xl text-primary mb-6 tracking-tight">Un problème de plomberie ?<br/>On répond.</h2>
-          <p className="text-xl text-slate-600 mb-10 font-light">Ne perdez pas de temps. Appelez-nous maintenant pour une estimation verbale ou une intervention immédiate.</p>
+          <h2 className="font-heading font-black text-4xl sm:text-5xl text-primary mb-6 tracking-tight">{texts.ctaTitle1}<br/>{texts.ctaTitle2}</h2>
+          <p className="text-xl text-slate-600 mb-10 font-light">{texts.ctaDesc}</p>
           <a href={phoneLink} className="inline-flex items-center justify-center gap-4 bg-accent hover:bg-red-700 text-white px-10 py-5 rounded-sm font-bold text-2xl sm:text-3xl transition-transform hover:scale-105 shadow-xl">
             <Phone className="w-8 h-8 animate-pulse" />
             {phoneNumber}
